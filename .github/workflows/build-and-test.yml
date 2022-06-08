@@ -20,4 +20,13 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run unit tests
-        run: npm test 
+        run: npm test
+        
+        ### NEW STEPS BELOW! ###
+        
+      - name: Daemonize our Node API service
+        run: npm run start &
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@v2.0.0
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
